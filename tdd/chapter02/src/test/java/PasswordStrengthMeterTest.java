@@ -1,6 +1,8 @@
-package test;
+package src.test.java;
 
 import org.junit.jupiter.api.Test;
+import src.main.java.PasswordStrength;
+import src.main.java.PasswordStrengthMeter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -25,6 +27,41 @@ public class PasswordStrengthMeterTest {
     void meetsTwoCriteriaWithoutNumber() {
         assertStrength("abcABC!@#", PasswordStrength.NORMAL);
 
+    }
+
+    @Test
+    void inputNull() {
+        assertStrength(null, PasswordStrength.INVALID);
+    }
+
+    @Test
+    void inputEmptyString() {
+        assertStrength("", PasswordStrength.INVALID);
+    }
+
+    @Test
+    void meetsTwoCriteriaWithoutUpper() {
+        assertStrength("asd123zxc", PasswordStrength.NORMAL);
+    }
+
+    @Test
+    void meetOnlyLengthCriteria() {
+        assertStrength("aaaaaaaaaa", PasswordStrength.WEAK);
+    }
+
+    @Test
+    void meetOnlyNumberCriteria() {
+        assertStrength("123", PasswordStrength.WEAK);
+    }
+
+    @Test
+    void meetOnlyUpperCriteria() {
+        assertStrength("ASD", PasswordStrength.WEAK);
+    }
+
+    @Test
+    void meetNoCriteria() {
+        assertStrength("asd", PasswordStrength.WEAK);
     }
 }
 
