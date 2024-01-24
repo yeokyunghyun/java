@@ -16,7 +16,6 @@ public class ExpiryDateCalculator {
 
     private LocalDate expiryDateUsingFirstBillingDate(PayData payData, int addedMonth) {
         LocalDate candidateExp = payData.getBillingDate().plusMonths(addedMonth);
-
         if (!isSameDayOfMonth(payData.getFirstBillingDate(), candidateExp)) {
             /*1월 31일에 1달을 해서 2월 28이 되고 그 뒤에 2월 28일에 10000원을 하면 3월 31일이 되는 구조여야되는데
              * 예외상황에서는 4월 31일로 되는 경우이기 때문에 이 논리구조를 사용할 수 없음*/
